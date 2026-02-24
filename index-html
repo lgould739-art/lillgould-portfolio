@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lilly Gould — Textile Zine</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--dusty-pink:#e97a9d;
+--butter:#f6d365;
+--sky:#8ecae6;
+--plum:#5e2b5f;
+--brown:#7a4e2d;
+--cream:#fdf8f2;
+}
+
+html{scroll-behavior:smooth;}
+body{
+margin:0;
+background:var(--cream);
+font-family:'IBM Plex Mono',monospace;
+color:var(--plum);
+}
+
+/* NAV */
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+background:white;
+border-bottom:1px solid #ddd;
+text-align:center;
+padding:15px 0;
+z-index:1000;
+}
+
+nav a{
+margin:0 20px;
+text-decoration:none;
+color:var(--brown);
+font-size:0.9rem;
+}
+
+/* HEADER */
+
+header{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+background:
+repeating-linear-gradient(90deg,var(--dusty-pink),var(--dusty-pink) 60px,var(--butter) 60px,var(--butter) 120px);
+}
+
+h1{
+font-family:'Playfair Display',serif;
+font-size:clamp(3rem,7vw,5rem);
+background:white;
+padding:25px 45px;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+.subtitle{margin-top:20px;}
+
+/* SECTION BASE */
+
+section{
+padding:140px 10%;
+opacity:0;
+transform:translateY(50px);
+transition:all 1s ease;
+position:relative;
+}
+
+section.visible{
+opacity:1;
+transform:translateY(0);
+}
+
+/* QUILT BLOCK STYLE */
+
+.zine-page{
+background:white;
+padding:60px;
+box-shadow:0 20px 40px rgba(0,0,0,0.08);
+position:relative;
+}
+
+/* STITCH BORDER */
+
+.zine-page:before{
+content:"";
+position:absolute;
+top:15px;left:15px;right:15px;bottom:15px;
+border:2px dashed var(--brown);
+pointer-events:none;
+}
+
+/* SCRAPBOOK TAPE */
+
+.zine-page:after{
+content:"";
+position:absolute;
+top:-15px;
+left:40px;
+width:120px;
+height:30px;
+background:rgba(255,255,255,0.7);
+transform:rotate(-5deg);
+box-shadow:0 5px 10px rgba(0,0,0,0.1);
+}
+
+/* BACKGROUNDS */
+
+#paintings{
+background:
+radial-gradient(circle at 20% 20%,var(--sky) 5px,transparent 5px) 0 0/50px 50px,
+var(--cream);
+}
+
+#fiber{
+background:
+repeating-linear-gradient(0deg,var(--butter),var(--butter) 60px,var(--dusty-pink) 60px,var(--dusty-pink) 120px);
+}
+
+#about{
+background:
+repeating-linear-gradient(90deg,var(--sky),var(--sky) 40px,var(--cream) 40px,var(--cream) 80px);
+}
+
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:40px;
+}
+
+.art-piece img{
+width:100%;
+display:block;
+}
+
+.caption{
+margin-top:10px;
+font-size:0.85rem;
+}
+
+/* CONTACT */
+
+#contact{
+background:var(--plum);
+color:var(--cream);
+text-align:center;
+}
+
+footer{
+text-align:center;
+padding:40px;
+font-size:0.8rem;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="#paintings">Paintings</a>
+<a href="#fiber">Fiber</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<header>
+<div>
+<h1>Lilly Gould</h1>
+<div class="subtitle">Painter & Fiber Artist</div>
+</div>
+</header>
+
+<section id="paintings">
+<div class="zine-page">
+<h2>Paintings</h2>
+<div class="grid">
+<div class="art-piece">
+<img src="painting1.jpg">
+<div class="caption">Title — Acrylic — 2026</div>
+</div>
+<div class="art-piece">
+<img src="painting2.jpg">
+<div class="caption">Title — Oil — 2026</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="fiber">
+<div class="zine-page">
+<h2>Fiber Work</h2>
+<div class="grid">
+<div class="art-piece">
+<img src="fiber1.jpg">
+<div class="caption">Quilt — 2026</div>
+</div>
+<div class="art-piece">
+<img src="fiber2.jpg">
+<div class="caption">Tapestry — 2026</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="zine-page">
+<h2>About</h2>
+<p>
+Lilly Gould works across painting and fiber, exploring domestic interiors,
+textile repetition, softness, and layered pattern.
+</p>
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+<p>Email: your@email.com</p>
+<p>Instagram: @yourhandle</p>
+</section>
+
+<footer>© 2026 Lilly Gould</footer>
+
+<script>
+const sections=document.querySelectorAll("section");
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){entry.target.classList.add("visible");}
+});
+},{threshold:0.2});
+sections.forEach(section=>observer.observe(section));
+</script>
+
+</body>
+</html>
